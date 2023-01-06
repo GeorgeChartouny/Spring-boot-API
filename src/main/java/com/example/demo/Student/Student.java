@@ -1,8 +1,17 @@
 package com.example.demo.Student;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity // to map this student to the db (hibernate)
+//@Table //  (database)
+@Table(name = "Student")
 public class Student {
+
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.IDENTITY
+    )
     private Long id;
     private String name;
     private LocalDate dob;
