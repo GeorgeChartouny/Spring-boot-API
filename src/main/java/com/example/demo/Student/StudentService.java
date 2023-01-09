@@ -26,10 +26,22 @@ public class StudentService {
   Optional<Student> studentOptional = studentRepository
           .findStudentByEmail(student.getEmail());
 
-  if(studentOptional.isPresent()){
-    throw new IllegalStateException("Email already in use");
-  }
-        studentRepository.save(student);
-System.out.println(student);
+            if(studentOptional.isPresent()){
+            throw new IllegalStateException("Email already in use");
+            }
+            studentRepository.save(student);
+            System.out.println(student);
+    }
+
+    public void deleteStudent(Long studentId){
+       // studentRepository.findById(studentId);
+
+        boolean exists = studentRepository.existsById(studentId);
+
+        if(!exists){
+            throw new IllegalStateException("Student with id "+ studentId + "does not exists!");
+        }
+        studentRepository.deleteById(studentId);
+        System.out.println("Successfully deleted");
     }
 }
